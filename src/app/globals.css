@@ -4,24 +4,251 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #1a1a2e;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .container-wide {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent-500 px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-primary-600 bg-transparent px-6 py-3 font-semibold text-primary-600 transition-all duration-200 hover:bg-primary-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold text-dark-900 md:text-4xl lg:text-5xl;
+  }
+
+  .section-subtitle {
+    @apply mt-4 text-lg text-dark-400 md:text-xl;
+  }
+
+  /* ====== ROUNDED (original) styles — keep for elements that stay curved ====== */
+  .card {
+    @apply rounded-xl bg-white p-6 shadow-lg transition-all duration-200 hover:shadow-xl;
+  }
+
+  /* ====== MARKER STYLES — sharp corners, black pen-sketch borders ====== */
+
+  /* Card with hand-drawn marker border */
+  .marker-card {
+    background: white;
+    padding: 1.5rem;
+    border: 2.5px solid #0f172a;
+    border-radius: 0;
+    box-shadow: 5px 5px 0 0 #6b7280;
+    transition: all 0.2s ease;
+  }
+
+  .marker-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #6b7280;
+  }
+
+  /* Card with no padding (for image+content cards) */
+  .marker-card-nopad {
+    background: white;
+    border: 2.5px solid #0f172a;
+    border-radius: 0;
+    box-shadow: 5px 5px 0 0 #6b7280;
+    transition: all 0.2s ease;
+  }
+
+  .marker-card-nopad:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #6b7280;
+  }
+
+  /* Primary button — marker style */
+  .btn-marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    background: #e85d2c;
+    color: white;
+    border: 2.5px solid #0f172a;
+    border-radius: 0;
+    box-shadow: 5px 5px 0 0 #6b7280;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    transform: rotate(-0.5deg);
+  }
+
+  .btn-marker:hover {
+    transform: rotate(0deg) translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #6b7280;
+  }
+
+  .btn-marker:active {
+    transform: rotate(0deg) translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 #6b7280;
+  }
+
+  /* Secondary marker button (ghost style) */
+  .btn-marker-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    background: transparent;
+    color: white;
+    border: 2.5px solid rgba(255,255,255,0.4);
+    border-radius: 0;
+    box-shadow: 5px 5px 0 0 rgba(255,255,255,0.15);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    transform: rotate(0.5deg);
+  }
+
+  .btn-marker-ghost:hover {
+    background: rgba(255,255,255,0.1);
+    transform: rotate(0deg) translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 rgba(255,255,255,0.15);
+  }
+
+  /* Section label badge — marker style */
+  .marker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 1rem;
+    border: 2.5px solid #0f172a;
+    border-radius: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: white;
+    color: #0f172a;
+    box-shadow: 4px 4px 0 0 #6b7280;
+  }
+
+  .marker-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2.5px solid #0f172a;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 0 #6b7280;
+  }
+
+  .marker-sale {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border: 2.5px solid #0f172a;
+    border-radius: 0;
+    font-size: 0.625rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: #e85d2c;
+    color: white;
+    box-shadow: 3px 3px 0 0 #6b7280;
+  }
+
+  .marker-stock {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border: 2.5px solid #0f172a;
+    border-radius: 0;
+    font-size: 0.625rem;
+    font-weight: 700;
+    background: white;
+    color: #0f172a;
+    box-shadow: 3px 3px 0 0 #6b7280;
+  }
+
+  .marker-input {
+    border: 2.5px solid #0f172a !important;
+    border-radius: 0 !important;
+    box-shadow: 3px 3px 0 0 #6b7280 !important;
+    outline: none;
+  }
+
+  .marker-input:focus {
+    box-shadow: 4px 4px 0 0 #6b7280 !important;
+    transform: translate(-1px, -1px);
+  }
+
+  .marker-select {
+    border: 2.5px solid #0f172a !important;
+    border-radius: 0 !important;
+    box-shadow: 3px 3px 0 0 #6b7280 !important;
+  }
+
+  .marker-table-wrap {
+    border: 2.5px solid #0f172a;
+    box-shadow: 5px 5px 0 0 #6b7280;
+    overflow: hidden;
+  }
+
+  .marker-table-wrap thead {
+    background: #0f172a;
+  }
+
+  .marker-table-wrap th {
+    color: white;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2.5px solid #0f172a;
+  }
+
+  .marker-table-wrap td {
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .marker-table-wrap tr:last-child td {
+    border-bottom: none;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, #e85d2c 0%, #f27d45 100%);
+  }
+
+  .gradient-gold {
+    background: linear-gradient(135deg, #c4952c 0%, #d4a34a 100%);
   }
 }
