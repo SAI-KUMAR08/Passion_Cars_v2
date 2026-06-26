@@ -40,9 +40,14 @@ export default function SignupPage() {
       return;
     }
 
-    const digitsOnly = phone.replace(/\D/g, "");
-    if (digitsOnly.length < 10) {
-      setError("Please enter a valid phone number — must be at least 10 digits after country code");
+    const trimmed = phone.trim();
+    if (!trimmed.startsWith("+")) {
+      setError("Phone must include country code — start with + (e.g. +91XXXXXXXXXX)");
+      return;
+    }
+    const digitsOnly = trimmed.replace(/\D/g, "");
+    if (digitsOnly.length < 12) {
+      setError("Phone must be country code + 10-digit number (e.g. +918639423380)");
       return;
     }
 
