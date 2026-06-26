@@ -36,12 +36,19 @@ export default function LoginPage() {
 
     const trimmed = phone.trim();
     if (!trimmed.startsWith("+")) {
-      setError('Phone must include country code — start with + (e.g. +91XXXXXXXXXX)');
+      setError('Phone must start with + (e.g. +918639423380)');
       return;
     }
     const digitsOnly = trimmed.replace(/\D/g, "");
+    // Country code (1-3 digits) + exactly 10-digit number
     if (digitsOnly.length < 11 || digitsOnly.length > 13) {
-      setError('Enter a valid 10-digit number with country code (e.g. +918639423380)');
+      setError('Enter country code + exactly 10 digits (e.g. +918639423380)');
+      return;
+    }
+    const localDigits = digitsOnly.slice(-10);
+    const countryDigits = digitsOnly.slice(0, -10);
+    if (countryDigits.length < 1 || countryDigits.length > 3 || localDigits.length !== 10) {
+      setError('Enter country code + exactly 10 digits (e.g. +918639423380)');
       return;
     }
 
