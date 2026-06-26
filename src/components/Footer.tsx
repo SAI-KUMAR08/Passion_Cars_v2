@@ -7,7 +7,7 @@ import { useSettings } from "@/context/SettingsContext";
 const SocialIcon = ({ children, href, label }: { children: React.ReactNode; href: string; label: string }) => (
   <a
     href={href}
-    className="flex h-10 w-10 items-center justify-center rounded-lg bg-dark-800 text-gray-400 transition-colors hover:bg-accent-500 hover:text-white"
+    className="flex h-10 w-10 items-center justify-center rounded-lg bg-navy-700 text-gray-400 transition-colors hover:bg-brand-600 hover:text-white"
     aria-label={label}
     target="_blank"
     rel="noopener noreferrer"
@@ -19,24 +19,24 @@ const SocialIcon = ({ children, href, label }: { children: React.ReactNode; href
 export default function Footer() {
   const { settings } = useSettings();
   return (
-    <footer className="bg-dark-950 text-white">
+    <footer className="bg-navy-800 text-white">
       {/* Main Footer */}
       <div className="container-wide py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Column */}
           <div className="space-y-5">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-500">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-600">
                 <span className="text-lg font-bold text-white">C</span>
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-white">
-                  Car<span className="text-accent-500">Timez</span>
+                  Car<span className="text-brand-500">Timez</span>
                 </span>
               </div>
             </Link>
             <p className="text-sm leading-relaxed text-gray-400">
-              Premium pre-owned cars driven on trust & quality. We offer the best selection of quality-assured
+              Premium pre-owned cars driven on trust &amp; quality. We offer the best selection of quality-assured
               pre-owned vehicles with comprehensive warranty and after-sales support.
             </p>
             <div className="flex gap-3">
@@ -80,7 +80,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 transition-colors hover:text-accent-400"
+                    className="text-sm text-gray-400 transition-colors hover:text-brand-400"
                   >
                     {link.label}
                   </Link>
@@ -104,7 +104,7 @@ export default function Footer() {
                 "Vehicle Inspection",
               ].map((service) => (
                 <li key={service}>
-                  <span className="text-sm text-gray-400 transition-colors hover:text-accent-400 cursor-pointer">
+                  <span className="text-sm text-gray-400 transition-colors hover:text-brand-400 cursor-pointer">
                     {service}
                   </span>
                 </li>
@@ -121,18 +121,18 @@ export default function Footer() {
               <li>
                 <a
                   href={"tel:" + settings.phone.replace(/[^0-9+]/g, "")}
-                  className="flex items-center gap-3 text-sm text-gray-400 transition-colors hover:text-accent-400"
+                  className="flex items-center gap-3 text-sm text-gray-400 transition-colors hover:text-brand-400"
                 >
-                  <Phone className="h-4 w-4 flex-shrink-0 text-accent-500" />
+                  <Phone className="h-4 w-4 flex-shrink-0 text-brand-500" />
                   <span>{settings.phone}</span>
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:info@cartimez.com"
-                  className="flex items-center gap-3 text-sm text-gray-400 transition-colors hover:text-accent-400"
+                  className="flex items-center gap-3 text-sm text-gray-400 transition-colors hover:text-brand-400"
                 >
-                  <Mail className="h-4 w-4 flex-shrink-0 text-accent-500" />
+                  <Mail className="h-4 w-4 flex-shrink-0 text-brand-500" />
                   <span>info@cartimez.com</span>
                 </a>
               </li>
@@ -141,15 +141,15 @@ export default function Footer() {
                   href={"https://wa.me/" + settings.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm text-gray-400 transition-colors hover:text-accent-400"
+                  className="flex items-center gap-3 text-sm text-gray-400 transition-colors hover:text-brand-400"
                 >
-                  <MessageCircle className="h-4 w-4 flex-shrink-0 text-accent-500" />
+                  <MessageCircle className="h-4 w-4 flex-shrink-0 text-brand-500" />
                   <span>WhatsApp</span>
                 </a>
               </li>
               <li>
                 <span className="flex items-start gap-3 text-sm text-gray-400">
-                  <MapPin className="h-4 w-4 flex-shrink-0 text-accent-500 mt-0.5" />
+                  <MapPin className="h-4 w-4 flex-shrink-0 text-brand-500 mt-0.5" />
                   <span>
                     123, Auto Plaza, Sector 18
                     <br />
@@ -163,7 +163,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-dark-800">
+      <div className="border-t border-navy-700">
         <div className="container-wide flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
           <p className="text-sm text-gray-500">
             &copy; {new Date().getFullYear()} CarTimez. All rights reserved.

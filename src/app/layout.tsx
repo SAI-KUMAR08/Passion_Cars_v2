@@ -6,6 +6,7 @@ import FloatingContact from "@/components/FloatingContact";
 import { AuthProvider } from "@/context/AuthContext";
 import { CarProvider } from "@/context/CarContext";
 import { SettingsProvider } from "@/context/SettingsContext";
+import { ToastProvider } from "@/components/Toast";
 import SeedCredentials from "@/components/SeedCredentials";
 import "./globals.css";
 
@@ -47,12 +48,14 @@ export default function RootLayout({
         <AuthProvider>
           <CarProvider>
             <SettingsProvider>
-            <SeedCredentials />
-            <Header />
-            <FloatingContact />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </SettingsProvider>
+              <ToastProvider>
+                <SeedCredentials />
+                <Header />
+                <FloatingContact />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </ToastProvider>
+            </SettingsProvider>
           </CarProvider>
         </AuthProvider>
       </body>
