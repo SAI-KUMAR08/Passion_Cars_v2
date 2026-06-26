@@ -248,9 +248,10 @@ export default function SignupPage() {
                 <p className="mb-4 text-xs text-gray-400">Enter the 6-digit code sent to your phone</p>
 
                 {devOtp && (
-                  <div className="mb-4 rounded-lg bg-yellow-50 border border-yellow-200 px-4 py-2.5 text-sm text-yellow-700">
-                    <span className="font-medium">Your OTP:</span>{" "}
-                    <span className="font-mono font-bold text-yellow-800">{devOtp}</span>
+                  <div className="mb-5 rounded-xl bg-brand-600 px-6 py-5 text-center shadow-lg">
+                    <p className="text-sm font-medium text-brand-100">Your One-Time Password</p>
+                    <p className="mt-1 text-3xl font-bold tracking-[0.25em] text-white">{devOtp}</p>
+                    <p className="mt-1 text-xs text-brand-200">Valid for 5 minutes</p>
                   </div>
                 )}
 
