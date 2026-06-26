@@ -31,7 +31,7 @@ export default function Footer() {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-white">
-                  Car<span className="text-brand-500">Timez</span>
+                  Passion<span className="text-brand-500">Car</span>
                 </span>
               </div>
             </Link>
@@ -133,7 +133,7 @@ export default function Footer() {
                   className="flex items-center gap-3 text-sm text-gray-400 transition-colors hover:text-brand-400"
                 >
                   <Mail className="h-4 w-4 flex-shrink-0 text-brand-500" />
-                  <span>info@cartimez.com</span>
+                  <span>info@passioncar.com</span>
                 </a>
               </li>
               <li>
@@ -166,7 +166,7 @@ export default function Footer() {
       <div className="border-t border-navy-700">
         <div className="container-wide flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} CarTimez. All rights reserved.
+            &copy; {new Date().getFullYear()} Passion Car. All rights reserved.
           </p>
           <div className="flex gap-6">
             <span className="text-sm text-gray-500 hover:text-gray-400 cursor-pointer">

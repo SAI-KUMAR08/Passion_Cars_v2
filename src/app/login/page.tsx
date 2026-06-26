@@ -51,7 +51,7 @@ export default function LoginPage() {
             <Car className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
-          <p className="mt-2 text-gray-500">Sign in to your CarTimez account</p>
+          <p className="mt-2 text-gray-500">Sign in to your Passion Car account</p>
         </div>
 
         {/* Form */}

@@ -35,8 +35,8 @@ export default function ContactPage() {
     {
       icon: Mail,
       label: "Email",
-      details: ["info@cartimez.com", "sales@cartimez.com"],
-      action: { href: "mailto:info@cartimez.com", text: "Send Email" },
+      details: ["info@passioncar.com", "sales@passioncar.com"],
+      action: { href: "mailto:info@passioncar.com", text: "Send Email" },
     },
     {
       icon: MapPin,
@@ -107,7 +107,7 @@ export default function ContactPage() {
                 <div className="flex h-full w-full items-center justify-center bg-gray-800">
                   <div className="text-center text-white">
                     <MapPin className="mx-auto h-12 w-12 text-brand-400" />
-                    <p className="mt-2 text-lg font-semibold">CarTimez Showroom</p>
+                    <p className="mt-2 text-lg font-semibold">Passion Car Showroom</p>
                     <p className="text-sm text-gray-400">123, Auto Plaza, Sector 18, Mumbai</p>
                   </div>
                 </div>

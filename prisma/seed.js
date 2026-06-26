@@ -33,8 +33,8 @@ async function main() {
   console.log("Seeding users...");
   const adminHash = await bcrypt.hash("admin123", 10);
   const demoHash = await bcrypt.hash("demo123", 10);
-  await prisma.user.create({ data: { name: "Admin User", email: "admin@cartimez.com", password: adminHash, isAdmin: true } });
-  await prisma.user.create({ data: { name: "Demo User", email: "demo@cartimez.com", password: demoHash, isAdmin: false } });
+  await prisma.user.create({ data: { name: "Admin User", email: "admin@passioncar.com", password: adminHash, isAdmin: true } });
+  await prisma.user.create({ data: { name: "Demo User", email: "demo@passioncar.com", password: demoHash, isAdmin: false } });
   console.log("Seeded 2 users");
 
   console.log("Seeding settings...");

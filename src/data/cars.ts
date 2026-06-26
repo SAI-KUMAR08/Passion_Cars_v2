@@ -387,7 +387,7 @@ export const teamMembers = [
   {
     name: "Vikram Mehta",
     role: "Founder & CEO",
-    bio: "With over 15 years in the automotive industry, Vikram founded CarTimez with a vision to make pre-owned car buying transparent and trustworthy.",
+    bio: "With over 15 years in the automotive industry, Vikram founded Passion Car with a vision to make pre-owned car buying transparent and trustworthy.",
     image: "/images/team-1.svg",
   },
   {
@@ -433,6 +433,6 @@ export const faqs = [
 
 // Demo credentials
 export const demoCredentials = {
-  admin: { email: "admin@cartimez.com", password: "admin123", name: "Admin User" },
-  user: { email: "demo@cartimez.com", password: "demo123", name: "Demo User" },
+  admin: { email: "admin@passioncar.com", password: "admin123", name: "Admin User" },
+  user: { email: "demo@passioncar.com", password: "demo123", name: "Demo User" },
 };

@@ -102,7 +102,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Truck className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-base font-bold">CarTimez</p>
+              <p className="text-base font-bold">Passion Car</p>
               <p className="-mt-0.5 text-[10px] font-medium uppercase tracking-wider text-gray-400">Admin Panel</p>
             </div>
           </Link>
@@ -163,7 +163,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600">
               <Truck className="h-4 w-4 text-white" />
             </div>
-            <span className="font-bold text-gray-900">CarTimez Admin</span>
+            <span className="font-bold text-gray-900">Passion Car Admin</span>
           </div>
         </header>
 

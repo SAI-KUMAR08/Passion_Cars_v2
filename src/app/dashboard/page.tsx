@@ -42,7 +42,7 @@ export default function UserDashboardPage() {
               <span className="text-base font-bold text-white">C</span>
             </div>
             <span className="text-lg font-bold text-gray-900">
-              Car<span className="text-brand-600">Timez</span>
+              Passion<span className="text-brand-600">Car</span>
             </span>
           </Link>
           <div className="flex items-center gap-3">

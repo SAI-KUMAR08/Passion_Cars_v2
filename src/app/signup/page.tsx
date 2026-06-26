@@ -62,7 +62,7 @@ export default function SignupPage() {
             <Car className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900">Create Account</h1>
-          <p className="mt-2 text-gray-500">Join CarTimez and start your journey</p>
+          <p className="mt-2 text-gray-500">Join Passion Car and start your journey</p>
         </div>
 
         {/* Form */}

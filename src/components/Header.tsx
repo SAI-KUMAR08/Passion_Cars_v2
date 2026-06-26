@@ -32,7 +32,7 @@ export default function Header() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold tracking-tight text-gray-900">
-                Car<span className="text-brand-600">Timez</span>
+                Passion<span className="text-brand-600">Car</span>
               </span>
               <span className="-mt-1 text-[10px] font-medium uppercase tracking-widest text-gray-400">
                 Premium Pre-Owned Cars

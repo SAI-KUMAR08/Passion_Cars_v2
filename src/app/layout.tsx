@@ -15,9 +15,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CarTimez | Premium Pre-Owned Cars Driven on Trust & Quality",
+  title: "Passion Car | Premium Pre-Owned Cars Driven on Trust & Quality",
   description:
-    "Discover the finest selection of quality-assured pre-owned vehicles at CarTimez. Buy, sell, exchange, and finance used cars with transparent pricing and comprehensive warranty.",
+    "Discover the finest selection of quality-assured pre-owned vehicles at Passion Car. Buy, sell, exchange, and finance used cars with transparent pricing and comprehensive warranty.",
   keywords: [
     "pre-owned cars",
     "used cars",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "India",
   ],
   openGraph: {
-    title: "CarTimez | Premium Pre-Owned Cars",
+    title: "Passion Car | Premium Pre-Owned Cars",
     description: "Pre-Owned Cars Driven on Trust & Quality",
     type: "website",
   },

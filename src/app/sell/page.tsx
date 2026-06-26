@@ -89,7 +89,7 @@ export default function SellPage() {
               <span className="badge-red">Why Sell to Us</span>
               <h2 className="mt-4 text-3xl font-bold text-gray-900">We Offer the Best Value for Your Car</h2>
               <p className="mt-4 leading-relaxed text-gray-500">
-                At CarTimez, we believe in fair and transparent valuations. Our experienced team ensures you get
+                At Passion Car, we believe in fair and transparent valuations. Our experienced team ensures you get
                 the best market price for your vehicle with zero hassle.
               </p>
               <ul className="mt-6 space-y-4">

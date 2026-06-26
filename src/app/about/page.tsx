@@ -5,9 +5,9 @@ import { teamMembers } from "@/data/cars";
 import CTASection from "@/components/CTASection";
 
 export const metadata = {
-  title: "About Us | CarTimez",
+  title: "About Us | Passion Car",
   description:
-    "Learn about CarTimez — our story, mission, and the team behind India's most trusted pre-owned car dealership.",
+    "Learn about Passion Car — our story, mission, and the team behind India's most trusted pre-owned car dealership.",
 };
 
 const values = [
@@ -39,7 +39,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="bg-gray-900 py-20">
         <div className="container-wide text-center">
-          <h1 className="text-4xl font-bold text-white md:text-5xl lg:text-6xl">About CarTimez</h1>
+          <h1 className="text-4xl font-bold text-white md:text-5xl lg:text-6xl">About Passion Car</h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-400">
             Driven by passion, built on trust. Discover the story behind India&apos;s most reliable pre-owned car
             dealership.
@@ -57,7 +57,7 @@ export default function AboutPage() {
                 A Decade of Delivering Excellence
               </h2>
               <p className="mt-4 leading-relaxed text-gray-500">
-                Founded in 2015, CarTimez started with a simple vision — to transform the pre-owned car
+                Founded in 2015, Passion Car started with a simple vision — to transform the pre-owned car
                 buying experience in India. What began as a small showroom in Mumbai has grown into one of
                 the region&apos;s most trusted automotive dealerships.
               </p>
@@ -125,7 +125,7 @@ export default function AboutPage() {
         <div className="container-wide">
           <div className="mx-auto max-w-3xl text-center">
             <span className="badge-red">Our Team</span>
-            <h2 className="section-title mt-4">Meet the People Behind CarTimez</h2>
+            <h2 className="section-title mt-4">Meet the People Behind Passion Car</h2>
             <p className="section-subtitle">
               Our dedicated team of automotive experts is committed to providing you with the best experience.
             </p>
