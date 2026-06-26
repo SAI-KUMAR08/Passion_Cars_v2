@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { Car, PlusCircle, ArrowRight, LogOut } from "lucide-react";
+import { Car, PlusCircle, ArrowRight } from "lucide-react";
 
 export default function UserDashboardPage() {
   const { user, logout, loading } = useAuth();
@@ -33,36 +33,7 @@ export default function UserDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Bar */}
-      <header className="sticky top-0 z-30 border-b border-gray-100 bg-white shadow-sm">
-        <div className="container-wide flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700">
-              <svg viewBox="0 0 100 100" className="h-6 w-6 text-white" fill="currentColor">
-                <path d="M20 65c-2 0-4-1-5.5-3L8 52c-1.5-2-2-4-1-6l4-10c2-5 7-9 12-9h54c5 0 10 4 12 9l4 10c1 2 .5 4-1 6l-6.5 10c-1.5 2-3.5 3-5.5 3h-4c-3 0-5.5-1-7-3l-3-4H34l-3 4c-1.5 2-4 3-7 3h-4z"/>
-                <circle cx="28" cy="62" r="8" fill="none" stroke="currentColor" strokeWidth="3"/>
-                <circle cx="72" cy="62" r="8" fill="none" stroke="currentColor" strokeWidth="3"/>
-                <circle cx="28" cy="62" r="3" fill="currentColor"/>
-                <circle cx="72" cy="62" r="3" fill="currentColor"/>
-                <rect x="30" y="50" width="40" height="4" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5"/>
-              </svg>
-            </div>
-            <span className="text-lg font-bold text-gray-900">
-              Passion<span className="text-brand-600">Car</span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-500 hidden sm:block">{user.phone}</span>
-            <Link href="/" className="btn-ghost text-sm">Home</Link>
-            <button onClick={logout} className="flex items-center gap-2 rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50">
-              <LogOut className="h-4 w-4" />
-              <span className="hidden sm:inline">Sign Out</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-gray-50 pt-8">
       {/* Content */}
       <div className="container-wide py-8">
         {/* Welcome */}
