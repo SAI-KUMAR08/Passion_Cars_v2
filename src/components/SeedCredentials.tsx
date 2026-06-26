@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function SeedCredentials() {
   useEffect(() => {
     // Use a fresh key so previous deployments' flags don't block re-seeding
-    const KEY = "cartimez_seeded_v2";
+    const KEY = "passioncar_seeded_v3";
     if (localStorage.getItem(KEY)) return;
 
     fetch("/api/seed", { method: "POST" })

@@ -137,7 +137,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="border-t border-navy-700 p-4">
           <div className="mb-3 px-2">
             <p className="text-sm font-medium text-white">{user.name}</p>
-            <p className="text-xs text-gray-400">{user.email}</p>
+            <p className="text-xs text-gray-400">{user.phone}</p>
           </div>
           <div className="flex flex-col gap-2">
             <Link href="/" className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm text-gray-300 transition-colors hover:bg-navy-700 hover:text-white">

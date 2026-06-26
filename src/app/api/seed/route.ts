@@ -19,7 +19,8 @@ const cars = [
 
 export async function POST() {
   try {
-    // Clear existing data
+    // Clear existing data (including OTPs)
+    await prisma.otp.deleteMany();
     await prisma.car.deleteMany();
     await prisma.user.deleteMany();
     await prisma.setting.deleteMany();
@@ -29,11 +30,14 @@ export async function POST() {
       await prisma.car.create({ data: { ...cars[i], displayId: i + 1 } });
     }
 
-    // Seed users
+    // Seed users with phone numbers + emails
     const adminHash = await bcrypt.hash("admin@6781", 10);
-    const demoHash = await bcrypt.hash("dany@6781", 10);
-    await prisma.user.create({ data: { name: "Admin User", email: "passioncar@gmail.com", password: adminHash, isAdmin: true } });
-    await prisma.user.create({ data: { name: "Demo User", email: "danysagar169@gmail.com", password: demoHash, isAdmin: false } });
+    await prisma.user.create({
+      data: { name: "Admin User", phone: "+919999988888", email: "passioncar@gmail.com", password: adminHash, isAdmin: true },
+    });
+    await prisma.user.create({
+      data: { name: "Demo User", phone: "+918888877777", email: "demo@passioncar.com", isAdmin: false },
+    });
 
     // Seed settings
     await prisma.setting.create({ data: { key: "phone", value: "+91 99999 88888" } });

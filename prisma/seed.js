@@ -20,6 +20,7 @@ const cars = [
 
 async function main() {
   console.log("Clearing existing data...");
+  await prisma.otp.deleteMany();
   await prisma.car.deleteMany();
   await prisma.user.deleteMany();
   await prisma.setting.deleteMany();
@@ -31,10 +32,13 @@ async function main() {
   console.log(`Seeded ${cars.length} cars`);
 
   console.log("Seeding users...");
-  const adminHash = await bcrypt.hash("admin123", 10);
-  const demoHash = await bcrypt.hash("demo123", 10);
-  await prisma.user.create({ data: { name: "Admin User", email: "admin@passioncar.com", password: adminHash, isAdmin: true } });
-  await prisma.user.create({ data: { name: "Demo User", email: "demo@passioncar.com", password: demoHash, isAdmin: false } });
+  const adminHash = await bcrypt.hash("admin@6781", 10);
+  await prisma.user.create({
+    data: { name: "Admin User", phone: "+919999988888", email: "passioncar@gmail.com", password: adminHash, isAdmin: true },
+  });
+  await prisma.user.create({
+    data: { name: "Demo User", phone: "+918888877777", email: "demo@passioncar.com", isAdmin: false },
+  });
   console.log("Seeded 2 users");
 
   console.log("Seeding settings...");

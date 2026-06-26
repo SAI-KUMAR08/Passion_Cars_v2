@@ -433,6 +433,6 @@ export const faqs = [
 
 // Demo credentials
 export const demoCredentials = {
-  admin: { email: "passioncar@gmail.com", password: "admin@6781", name: "Admin User" },
-  user: { email: "danysagar169@gmail.com", password: "dany@6781", name: "Demo User" },
+  admin: { phone: "+919999988888", email: "passioncar@gmail.com", password: "admin@6781", name: "Admin User" },
+  user: { phone: "+918888877777", email: "demo@passioncar.com", name: "Demo User" },
 };

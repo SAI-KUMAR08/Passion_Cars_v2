@@ -4,15 +4,17 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 
 interface User {
   id: string;
-  email: string;
+  phone: string;
+  email?: string;
   name: string;
   isAdmin: boolean;
 }
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<boolean>;
-  signup: (name: string, email: string, password: string) => Promise<boolean>;
+  sendOtp: (phone: string) => Promise<{ success: boolean; otp?: string }>;
+  verifyOtp: (phone: string, otp: string, name?: string) => Promise<boolean>;
+  adminLogin: (phone: string, password: string) => Promise<boolean>;
   logout: () => void;
   loading: boolean;
 }
@@ -28,7 +30,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split(".")[1]));
-        setUser({ id: payload.id, email: payload.email, name: payload.name, isAdmin: payload.isAdmin });
+        setUser({
+          id: payload.id,
+          phone: payload.phone,
+          email: payload.email,
+          name: payload.name,
+          isAdmin: payload.isAdmin,
+        });
       } catch {
         localStorage.removeItem("cartimez_token");
       }
@@ -36,11 +44,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setLoading(false);
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    const res = await fetch("/api/auth/login", {
+  const sendOtp = async (phone: string): Promise<{ success: boolean; otp?: string }> => {
+    const res = await fetch("/api/auth/send-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ phone }),
+    });
+    if (!res.ok) return { success: false };
+    const data = await res.json();
+    return { success: true, otp: data.otp };
+  };
+
+  const verifyOtp = async (phone: string, otp: string, name?: string): Promise<boolean> => {
+    const body: Record<string, string> = { phone, otp };
+    if (name) body.name = name;
+
+    const res = await fetch("/api/auth/verify-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
     });
     if (!res.ok) return false;
     const data = await res.json();
@@ -49,11 +71,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return true;
   };
 
-  const signup = async (name: string, email: string, password: string): Promise<boolean> => {
-    const res = await fetch("/api/auth/signup", {
+  const adminLogin = async (phone: string, password: string): Promise<boolean> => {
+    const res = await fetch("/api/auth/admin-login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ phone, password }),
     });
     if (!res.ok) return false;
     const data = await res.json();
@@ -68,7 +90,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, loading }}>
+    <AuthContext.Provider value={{ user, sendOtp, verifyOtp, adminLogin, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

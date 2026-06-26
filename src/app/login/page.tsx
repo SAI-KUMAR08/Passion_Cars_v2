@@ -3,26 +3,116 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, LogIn, Car } from "lucide-react";
+import { LogIn, Car, ArrowLeft, Smartphone, MessageSquare } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [step, setStep] = useState<"phone" | "otp">("phone");
+  const [phone, setPhone] = useState("+91");
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [devOtp, setDevOtp] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const [resendTimer, setResendTimer] = useState(0);
+  const { sendOtp, verifyOtp } = useAuth();
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const startResendTimer = () => {
+    setResendTimer(30);
+    const interval = setInterval(() => {
+      setResendTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+
+    if (phone.replace(/\s/g, "").length < 10) {
+      setError("Please enter a valid phone number with country code");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await sendOtp(phone);
+      if (result.success) {
+        if (result.otp) setDevOtp(result.otp);
+        setStep("otp");
+        startResendTimer();
+      } else {
+        setError("Failed to send OTP. Please try again.");
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    if (resendTimer > 0) return;
     setError("");
     setLoading(true);
     try {
-      const success = await login(email, password);
+      const result = await sendOtp(phone);
+      if (result.success) {
+        if (result.otp) setDevOtp(result.otp);
+        setOtp(["", "", "", "", "", ""]);
+        startResendTimer();
+      } else {
+        setError("Failed to resend OTP.");
+      }
+    } catch {
+      setError("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOtpChange = (index: number, value: string) => {
+    if (value.length > 1) return;
+    if (!/^\d*$/.test(value)) return;
+
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    // Auto-advance to next field
+    if (value && index < 5) {
+      const nextInput = document.getElementById(`otp-${index + 1}`);
+      nextInput?.focus();
+    }
+  };
+
+  const handleOtpKeyDown = (index: number, e: React.KeyboardEvent) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      const prevInput = document.getElementById(`otp-${index - 1}`);
+      prevInput?.focus();
+    }
+    if (e.key === "Enter") {
+      handleVerifyOtp();
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    const otpString = otp.join("");
+    if (otpString.length !== 6) {
+      setError("Please enter the complete 6-digit OTP");
+      return;
+    }
+
+    setError("");
+    setLoading(true);
+    try {
+      const success = await verifyOtp(phone, otpString);
       if (success) {
-        // Check isAdmin from the stored user (available in AuthContext after login)
         const token = localStorage.getItem("cartimez_token");
         let isAdmin = false;
         if (token) {
@@ -33,13 +123,20 @@ export default function LoginPage() {
         }
         router.push(isAdmin ? "/admin" : "/dashboard");
       } else {
-        setError("Invalid email or password. Please try again.");
+        setError("Invalid or expired OTP. Please try again.");
       }
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleGoBack = () => {
+    setStep("phone");
+    setOtp(["", "", "", "", "", ""]);
+    setDevOtp("");
+    setError("");
   };
 
   return (
@@ -55,73 +152,157 @@ export default function LoginPage() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
+        <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
           {error && (
             <div className="mb-5 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600 border border-red-100">
               {error}
             </div>
           )}
 
-          <div className="space-y-5">
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-gray-700">Email Address</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                className="input-field"
-              />
-            </div>
+          {step === "phone" ? (
+            /* Step 1: Phone Number */
+            <form onSubmit={handleSendOtp} className="space-y-5">
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-gray-700">Phone Number</label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <Smartphone className="h-4 w-4 text-gray-400" />
+                  </div>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+91 99999 88888"
+                    required
+                    className="input-field pl-10"
+                  />
+                </div>
+                <p className="mt-1.5 text-xs text-gray-400">
+                  Include country code (e.g., +91 for India)
+                </p>
+              </div>
 
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-gray-700">Password</label>
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary w-full justify-center py-3.5 text-base disabled:opacity-60"
+              >
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    Sending OTP...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    <MessageSquare className="h-5 w-5" />
+                    Send OTP
+                  </span>
+                )}
+              </button>
+
+              <p className="text-center text-sm text-gray-500">
+                Don&apos;t have an account?{" "}
+                <Link href="/signup" className="font-semibold text-brand-600 hover:text-brand-700">
+                  Create one
+                </Link>
+              </p>
+
               <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  required
-                  className="input-field pr-10"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="bg-white px-2 text-gray-400">or</span>
+                </div>
+              </div>
+
+              <Link
+                href="/admin/login"
+                className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 py-3 text-sm font-medium text-gray-600 transition-colors hover:border-brand-200 hover:text-brand-600"
+              >
+                <LogIn className="h-4 w-4" />
+                Admin Login
+              </Link>
+            </form>
+          ) : (
+            /* Step 2: OTP Verification */
+            <div className="space-y-5">
+              <button
+                onClick={handleGoBack}
+                className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Change phone number
+              </button>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                  Enter OTP sent to {phone}
+                </label>
+                <p className="mb-4 text-xs text-gray-400">Enter the 6-digit code sent to your phone</p>
+
+                {devOtp && (
+                  <div className="mb-4 rounded-lg bg-yellow-50 border border-yellow-200 px-4 py-2.5 text-sm text-yellow-700">
+                    <span className="font-medium">DEV MODE:</span> OTP is{" "}
+                    <span className="font-mono font-bold text-yellow-800">{devOtp}</span>
+                  </div>
+                )}
+
+                <div className="flex justify-center gap-2">
+                  {otp.map((digit, index) => (
+                    <input
+                      key={index}
+                      id={`otp-${index}`}
+                      type="text"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                      value={digit}
+                      onChange={(e) => handleOtpChange(index, e.target.value)}
+                      onKeyDown={(e) => handleOtpKeyDown(index, e)}
+                      onFocus={(e) => e.target.select()}
+                      className="h-14 w-12 rounded-lg border border-gray-300 text-center text-xl font-bold text-gray-900 transition-all focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                      maxLength={1}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <button
+                onClick={handleVerifyOtp}
+                disabled={loading || otp.join("").length !== 6}
+                className="btn-primary w-full justify-center py-3.5 text-base disabled:opacity-60"
+              >
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    Verifying...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    <LogIn className="h-5 w-5" />
+                    Verify & Sign In
+                  </span>
+                )}
+              </button>
+
+              <div className="text-center">
+                {resendTimer > 0 ? (
+                  <p className="text-sm text-gray-400">
+                    Resend OTP in <span className="font-medium">{resendTimer}s</span>
+                  </p>
+                ) : (
+                  <button
+                    onClick={handleResendOtp}
+                    disabled={loading}
+                    className="text-sm font-medium text-brand-600 hover:text-brand-700 disabled:opacity-50"
+                  >
+                    Resend OTP
+                  </button>
+                )}
               </div>
             </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn-primary w-full justify-center py-3.5 text-base disabled:opacity-60"
-            >
-              {loading ? (
-                <span className="flex items-center gap-2">
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                  Signing in...
-                </span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  <LogIn className="h-5 w-5" />
-                  Sign In
-                </span>
-              )}
-            </button>
-
-            <p className="text-center text-sm text-gray-500">
-              Don&apos;t have an account?{" "}
-              <Link href="/signup" className="font-semibold text-brand-600 hover:text-brand-700">
-                Create one
-              </Link>
-            </p>
-          </div>
-        </form>
+          )}
+        </div>
       </div>
     </div>
   );

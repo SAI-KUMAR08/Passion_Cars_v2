@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, LogIn, Shield } from "lucide-react";
+import { LogIn, Shield, Smartphone, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("+919999988888");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { adminLogin } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,23 +19,11 @@ export default function AdminLoginPage() {
     setError("");
     setLoading(true);
     try {
-      const success = await login(email, password);
+      const success = await adminLogin(phone, password);
       if (success) {
-        const token = localStorage.getItem("cartimez_token");
-        let isAdmin = false;
-        if (token) {
-          try {
-            const payload = JSON.parse(atob(token.split(".")[1]));
-            isAdmin = payload.isAdmin;
-          } catch {}
-        }
-        if (isAdmin) {
-          router.push("/admin/dashboard");
-        } else {
-          setError("This login is for administrators only. Regular users please use the public login.");
-        }
+        router.push("/admin/dashboard");
       } else {
-        setError("Invalid email or password. Please try again.");
+        setError("Invalid credentials or you do not have admin access.");
       }
     } catch {
       setError("Something went wrong. Please try again.");
@@ -66,15 +54,20 @@ export default function AdminLoginPage() {
 
           <div className="space-y-4">
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-gray-300">Email Address</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="passioncar@gmail.com"
-                required
-                className="w-full rounded-lg border border-gray-600 bg-gray-700 px-4 py-2.5 text-sm text-white placeholder-gray-400 transition-all duration-200 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
-              />
+              <label className="mb-1.5 block text-sm font-medium text-gray-300">Phone Number</label>
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <Smartphone className="h-4 w-4 text-gray-400" />
+                </div>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+91 99999 88888"
+                  required
+                  className="w-full rounded-lg border border-gray-600 bg-gray-700 pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-400 transition-all duration-200 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                />
+              </div>
             </div>
 
             <div>
@@ -120,7 +113,7 @@ export default function AdminLoginPage() {
 
         <p className="mt-6 text-center text-sm text-gray-500">
           <a href="/login" className="text-gray-400 hover:text-white transition-colors">
-            Regular user? Sign in here
+            Regular user? Sign in with OTP
           </a>
         </p>
       </div>

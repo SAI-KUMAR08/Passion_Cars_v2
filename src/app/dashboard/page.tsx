@@ -46,7 +46,7 @@ export default function UserDashboardPage() {
             </span>
           </Link>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-500 hidden sm:block">{user.email}</span>
+            <span className="text-sm text-gray-500 hidden sm:block">{user.phone}</span>
             <Link href="/" className="btn-ghost text-sm">Home</Link>
             <button onClick={logout} className="flex items-center gap-2 rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50">
               <LogOut className="h-4 w-4" />

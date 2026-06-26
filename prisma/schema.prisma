@@ -11,9 +11,19 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   name      String
-  email     String   @unique
-  password  String
+  phone     String   @unique
+  email     String?
+  password  String?
   isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Otp {
+  id        Int      @id @default(autoincrement())
+  phone     String
+  otp       String
+  expiresAt DateTime
+  used      Boolean  @default(false)
   createdAt DateTime @default(now())
 }
 
