@@ -7,7 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Car, PlusCircle, ArrowRight } from "lucide-react";
 
 export default function UserDashboardPage() {
-  const { user, logout, loading } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
