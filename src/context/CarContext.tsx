@@ -20,8 +20,14 @@ export function CarProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     fetch("/api/cars")
-      .then((r) => r.json())
-      .then((data) => setCars(data))
+      .then((r) => {
+        if (!r.ok) throw new Error("API error");
+        return r.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data)) setCars(data);
+        else setCars([]);
+      })
       .catch(() => setCars([]))
       .finally(() => setLoading(false));
   }, []);

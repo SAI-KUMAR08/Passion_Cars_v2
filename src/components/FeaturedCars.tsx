@@ -17,7 +17,8 @@ function formatPrice(price: number) {
 
 export default function FeaturedCars() {
   const { cars, loading } = useCars();
-  const featuredCars = cars.slice(0, 6);
+  const carList = Array.isArray(cars) ? cars : [];
+  const featuredCars = carList.slice(0, 6);
 
   return (
     <section className="py-20">
