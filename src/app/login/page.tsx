@@ -206,23 +206,6 @@ export default function LoginPage() {
                   Create one
                 </Link>
               </p>
-
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="bg-white px-2 text-gray-400">or</span>
-                </div>
-              </div>
-
-              <Link
-                href="/admin/login"
-                className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 py-3 text-sm font-medium text-gray-600 transition-colors hover:border-brand-200 hover:text-brand-600"
-              >
-                <LogIn className="h-4 w-4" />
-                Admin Login
-              </Link>
             </form>
           ) : (
             /* Step 2: OTP Verification */

@@ -36,7 +36,7 @@ export async function POST() {
       data: { name: "Admin User", phone: "+919999988888", email: "passioncar@gmail.com", password: adminHash, isAdmin: true },
     });
     await prisma.user.create({
-      data: { name: "Demo User", phone: "+918888877777", email: "demo@passioncar.com", isAdmin: false },
+      data: { name: "Demo User", phone: "+918639423380", email: "demo@passioncar.com", isAdmin: false },
     });
 
     // Seed settings
