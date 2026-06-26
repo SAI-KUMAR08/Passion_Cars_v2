@@ -28,7 +28,12 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-600 transition-colors group-hover:bg-brand-700">
-              <span className="text-lg font-bold text-white">C</span>
+              <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6 text-white" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-3-4h-7l-3 4-2.5.1C1.7 10.3 1 11.1 1 12v3c0 .6.4 1 1 1h2" />
+                <circle cx="7" cy="17" r="2" />
+                <path d="M9 17h6" />
+                <circle cx="17" cy="17" r="2" />
+              </svg>
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold tracking-tight text-gray-900">
