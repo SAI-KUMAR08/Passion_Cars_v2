@@ -30,15 +30,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push("/admin/login");
-    }
-  }, [user, loading, router]);
+  const isLoginPage = pathname === "/admin/login";
 
   useEffect(() => {
     setSidebarOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    // Only redirect if NOT already on the login page
+    if (!loading && !user && !isLoginPage) {
+      router.push("/admin/login");
+    }
+  }, [user, loading, router, isLoginPage]);
+
+  // Login page renders directly without sidebar
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
 
   if (loading) {
     return (
