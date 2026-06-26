@@ -13,7 +13,7 @@ export default function AdminRedirect() {
       if (user?.isAdmin) {
         router.replace("/admin/dashboard");
       } else if (!user) {
-        router.replace("/login");
+        router.replace("/admin/login");
       } else {
         // Non-admin user — render inline access denied
       }
