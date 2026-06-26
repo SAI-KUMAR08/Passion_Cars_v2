@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight, Calendar, Cog, Fuel, Gauge, CircleDot,
-  Search, SlidersHorizontal, X, CarFront
+  Search, SlidersHorizontal, X
 } from "lucide-react";
 import { brands } from "@/data/cars";
 import { useCars } from "@/context/CarContext";
