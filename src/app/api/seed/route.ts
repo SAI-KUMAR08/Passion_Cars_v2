@@ -30,10 +30,10 @@ export async function POST() {
     }
 
     // Seed users
-    const adminHash = await bcrypt.hash("admin123", 10);
-    const demoHash = await bcrypt.hash("demo123", 10);
-    await prisma.user.create({ data: { name: "Admin User", email: "admin@passioncar.com", password: adminHash, isAdmin: true } });
-    await prisma.user.create({ data: { name: "Demo User", email: "demo@passioncar.com", password: demoHash, isAdmin: false } });
+    const adminHash = await bcrypt.hash("admin@6781", 10);
+    const demoHash = await bcrypt.hash("dany@6781", 10);
+    await prisma.user.create({ data: { name: "Admin User", email: "passioncar@gmail.com", password: adminHash, isAdmin: true } });
+    await prisma.user.create({ data: { name: "Demo User", email: "danysagar169@gmail.com", password: demoHash, isAdmin: false } });
 
     // Seed settings
     await prisma.setting.create({ data: { key: "phone", value: "+91 99999 88888" } });

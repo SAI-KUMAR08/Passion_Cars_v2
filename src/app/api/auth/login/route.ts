@@ -7,7 +7,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "cartimez-secret-change-in-producti
 
 // Inline seed — runs if the admin user doesn't exist (handles brand renames)
 async function ensureSeedData() {
-  const adminExists = await prisma.user.findUnique({ where: { email: "admin@passioncar.com" } });
+  const adminExists = await prisma.user.findUnique({ where: { email: "passioncar@gmail.com" } });
   if (adminExists) return;
 
   // Clear old data if the email changed (e.g. cartimez.com → passioncar.com)
@@ -47,11 +47,11 @@ async function ensureSeedData() {
     await prisma.car.create({ data: { ...cars[i], displayId: i + 1 } });
   }
 
-  const hash = await bcrypt.hash("admin123", 10);
-  await prisma.user.create({ data: { name: "Admin User", email: "admin@passioncar.com", password: hash, isAdmin: true } });
+  const hash = await bcrypt.hash("admin@6781", 10);
+  await prisma.user.create({ data: { name: "Admin User", email: "passioncar@gmail.com", password: hash, isAdmin: true } });
 
-  const demoHash = await bcrypt.hash("demo123", 10);
-  await prisma.user.create({ data: { name: "Demo User", email: "demo@passioncar.com", password: demoHash, isAdmin: false } });
+  const demoHash = await bcrypt.hash("dany@6781", 10);
+  await prisma.user.create({ data: { name: "Demo User", email: "danysagar169@gmail.com", password: demoHash, isAdmin: false } });
 
   await prisma.setting.create({ data: { key: "phone", value: "+91 99999 88888" } });
   await prisma.setting.create({ data: { key: "whatsapp", value: "919999988888" } });
