@@ -4,7 +4,7 @@
 
 :root {
   --background: #f9fafb;
-  --foreground: #111827;
+  --foreground: #1a1a2e;
 }
 
 @layer base {
@@ -63,7 +63,7 @@
     @apply inline-flex items-center rounded-md px-2.5 py-1 text-xs font-semibold;
   }
 
-  .badge-red {
+  .badge-orange {
     @apply badge bg-brand-50 text-brand-700 border border-brand-200;
   }
 
