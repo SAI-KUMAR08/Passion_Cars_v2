@@ -8,7 +8,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "cdn.simpleicons.org",
+        hostname: "upload.wikimedia.org",
       },
     ],
   },
