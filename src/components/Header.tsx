@@ -27,12 +27,14 @@ export default function Header() {
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-600 transition-colors group-hover:bg-brand-700">
-              <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6 text-white" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-3-4h-7l-3 4-2.5.1C1.7 10.3 1 11.1 1 12v3c0 .6.4 1 1 1h2" />
-                <circle cx="7" cy="17" r="2" />
-                <path d="M9 17h6" />
-                <circle cx="17" cy="17" r="2" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 transition-all group-hover:shadow-lg group-hover:shadow-brand-200">
+              <svg viewBox="0 0 100 100" className="h-7 w-7 text-white" fill="currentColor">
+                <path d="M20 65c-2 0-4-1-5.5-3L8 52c-1.5-2-2-4-1-6l4-10c2-5 7-9 12-9h54c5 0 10 4 12 9l4 10c1 2 .5 4-1 6l-6.5 10c-1.5 2-3.5 3-5.5 3h-4c-3 0-5.5-1-7-3l-3-4H34l-3 4c-1.5 2-4 3-7 3h-4z"/>
+                <circle cx="28" cy="62" r="8" fill="none" stroke="currentColor" strokeWidth="3"/>
+                <circle cx="72" cy="62" r="8" fill="none" stroke="currentColor" strokeWidth="3"/>
+                <circle cx="28" cy="62" r="3" fill="currentColor"/>
+                <circle cx="72" cy="62" r="3" fill="currentColor"/>
+                <rect x="30" y="50" width="40" height="4" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5"/>
               </svg>
             </div>
             <div className="flex flex-col">

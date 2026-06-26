@@ -5,6 +5,8 @@ import { CheckCircle, Upload, Phone, MessageCircle } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import { useSettings } from "@/context/SettingsContext";
 import ScrollReveal from "@/components/ScrollReveal";
+import { brands } from "@/data/cars";
+import { brandModels } from "@/data/carModels";
 
 export default function SellPage() {
   const { settings } = useSettings();
@@ -219,28 +221,37 @@ export default function SellPage() {
 
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div>
-                        <label className="mb-1.5 block text-sm font-medium text-gray-700">Car Make *</label>
-                        <input
-                          type="text"
+                        <label className="mb-1.5 block text-sm font-medium text-gray-700">Brand *</label>
+                        <select
                           name="carMake"
                           required
                           value={formData.carMake}
                           onChange={handleChange}
-                          placeholder="e.g. Hyundai, Toyota"
-                          className="input-field"
-                        />
+                          className="select-field"
+                        >
+                          <option value="">Select Brand</option>
+                          {brands.map((brand) => (
+                            <option key={brand} value={brand}>{brand}</option>
+                          ))}
+                        </select>
                       </div>
                       <div>
-                        <label className="mb-1.5 block text-sm font-medium text-gray-700">Car Model *</label>
-                        <input
-                          type="text"
+                        <label className="mb-1.5 block text-sm font-medium text-gray-700">Model *</label>
+                        <select
                           name="carModel"
                           required
                           value={formData.carModel}
                           onChange={handleChange}
-                          placeholder="e.g. Creta, Fortuner"
-                          className="input-field"
-                        />
+                          className="select-field"
+                          disabled={!formData.carMake}
+                        >
+                          <option value="">
+                            {formData.carMake ? "Select Model" : "Select brand first"}
+                          </option>
+                          {formData.carMake && brandModels[formData.carMake]?.map((model) => (
+                            <option key={model} value={model}>{model}</option>
+                          ))}
+                        </select>
                       </div>
                     </div>
 
