@@ -5,10 +5,18 @@ import prisma from "@/lib/prisma";
 
 const JWT_SECRET = process.env.JWT_SECRET || "cartimez-secret-change-in-production";
 
-// Inline seed — runs only when the DB is empty so first-login always works
+// Inline seed — runs if the admin user doesn't exist (handles brand renames)
 async function ensureSeedData() {
-  const count = await prisma.user.count();
-  if (count > 0) return;
+  const adminExists = await prisma.user.findUnique({ where: { email: "admin@passioncar.com" } });
+  if (adminExists) return;
+
+  // Clear old data if the email changed (e.g. cartimez.com → passioncar.com)
+  const oldAdmin = await prisma.user.findFirst();
+  if (oldAdmin) {
+    await prisma.user.deleteMany();
+    await prisma.car.deleteMany();
+    await prisma.setting.deleteMany();
+  }
 
   console.log("🔹 Database empty — auto-seeding demo data...");
 
