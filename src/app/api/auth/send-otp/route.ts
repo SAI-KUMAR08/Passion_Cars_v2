@@ -5,8 +5,6 @@ function generateOtp(): string {
   return String(Math.floor(100000 + Math.random() * 900000));
 }
 
-const isDev = process.env.NODE_ENV === "development";
-
 export async function POST(req: Request) {
   try {
     const { phone } = await req.json();
@@ -35,16 +33,13 @@ export async function POST(req: Request) {
       data: { phone: normalizedPhone, otp, expiresAt },
     });
 
-    // In development, return the OTP so the user can see it without SMS
-    const response: Record<string, unknown> = { success: true, message: "OTP sent to your phone" };
-    if (isDev) {
-      response.otp = otp;
-      response.message = "OTP sent (DEV: " + otp + ")";
-    }
-
-    console.log(`OTP for ${normalizedPhone}: ${otp} (expires at ${expiresAt.toISOString()})`);
-
-    return NextResponse.json(response);
+    // TODO: Replace with actual SMS service integration
+    // For now, return OTP directly so user can see it on screen
+    return NextResponse.json({
+      success: true,
+      message: "Your OTP is: " + otp,
+      otp,
+    });
   } catch (error) {
     console.error("send-otp error:", error);
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });

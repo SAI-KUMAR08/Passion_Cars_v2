@@ -226,7 +226,7 @@ export default function LoginPage() {
 
                 {devOtp && (
                   <div className="mb-4 rounded-lg bg-yellow-50 border border-yellow-200 px-4 py-2.5 text-sm text-yellow-700">
-                    <span className="font-medium">DEV MODE:</span> OTP is{" "}
+                    <span className="font-medium">Your OTP:</span>{" "}
                     <span className="font-mono font-bold text-yellow-800">{devOtp}</span>
                   </div>
                 )}
