@@ -42,12 +42,12 @@ export default function SignupPage() {
 
     const trimmed = phone.trim();
     if (!trimmed.startsWith("+")) {
-      setError("Phone must include country code — start with + (e.g. +91XXXXXXXXXX)");
+      setError('Phone must include country code — start with + (e.g. +91XXXXXXXXXX)');
       return;
     }
     const digitsOnly = trimmed.replace(/\D/g, "");
-    if (digitsOnly.length < 12) {
-      setError("Phone must be country code + 10-digit number (e.g. +918639423380)");
+    if (digitsOnly.length < 11 || digitsOnly.length > 13) {
+      setError('Enter a valid 10-digit number with country code (e.g. +918639423380)');
       return;
     }
 
