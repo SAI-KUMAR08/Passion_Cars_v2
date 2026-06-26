@@ -16,6 +16,28 @@ export default function HeroSection() {
 
       <div className="container-wide relative z-10">
         <div className="flex min-h-[85vh] flex-col items-center justify-center py-20 text-center">
+          {/* Hero Logo */}
+          <div className="animate-fade-in mb-6 flex items-center gap-3">
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 shadow-lg shadow-brand-500/20">
+              <svg viewBox="0 0 100 100" className="h-9 w-9 text-white" fill="currentColor">
+                <path d="M20 65c-2 0-4-1-5.5-3L8 52c-1.5-2-2-4-1-6l4-10c2-5 7-9 12-9h54c5 0 10 4 12 9l4 10c1 2 .5 4-1 6l-6.5 10c-1.5 2-3.5 3-5.5 3h-4c-3 0-5.5-1-7-3l-3-4H34l-3 4c-1.5 2-4 3-7 3h-4z"/>
+                <circle cx="28" cy="62" r="8" fill="none" stroke="currentColor" strokeWidth="3"/>
+                <circle cx="72" cy="62" r="8" fill="none" stroke="currentColor" strokeWidth="3"/>
+                <circle cx="28" cy="62" r="3" fill="currentColor"/>
+                <circle cx="72" cy="62" r="3" fill="currentColor"/>
+                <rect x="30" y="50" width="40" height="4" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+              </svg>
+            </div>
+            <div className="flex flex-col items-start">
+              <span className="text-2xl font-bold tracking-tight text-white">
+                Passion<span className="text-brand-500">Car</span>
+              </span>
+              <span className="text-xs font-medium uppercase tracking-widest text-gray-400">
+                Premium Pre-Owned Cars
+              </span>
+            </div>
+          </div>
+
           {/* Badge */}
           <div className="animate-fade-in mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-300 backdrop-blur-sm">
             <span className="flex h-2 w-2 rounded-full bg-brand-500" />
