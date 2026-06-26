@@ -69,15 +69,13 @@ export default function Header() {
               </Link>
             ) : (
               <>
-                {user.isAdmin && (
-                  <Link
-                    href="/admin"
-                    className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
-                  >
-                    <LayoutDashboard className="h-4 w-4" />
-                    <span>Dashboard</span>
-                  </Link>
-                )}
+                <Link
+                  href={user.isAdmin ? "/admin" : "/dashboard"}
+                  className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  <span>Dashboard</span>
+                </Link>
                 <button
                   onClick={logout}
                   className="flex items-center gap-2 rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
@@ -139,16 +137,14 @@ export default function Header() {
                   </Link>
                 ) : (
                   <>
-                    {user.isAdmin && (
-                      <Link
-                        href="/admin"
-                        onClick={() => setIsOpen(false)}
-                        className="btn-primary justify-center text-sm"
-                      >
-                        <LayoutDashboard className="h-4 w-4" />
-                        Dashboard
-                      </Link>
-                    )}
+                    <Link
+                      href={user.isAdmin ? "/admin" : "/dashboard"}
+                      onClick={() => setIsOpen(false)}
+                      className="btn-primary justify-center text-sm"
+                    >
+                      <LayoutDashboard className="h-4 w-4" />
+                      Dashboard
+                    </Link>
                     <button
                       onClick={() => { logout(); setIsOpen(false); }}
                       className="flex items-center justify-center gap-2 rounded-lg border border-red-200 px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50"

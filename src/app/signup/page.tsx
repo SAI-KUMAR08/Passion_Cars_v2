@@ -34,7 +34,15 @@ export default function SignupPage() {
     try {
       const success = await signup(name, email, password);
       if (success) {
-        router.push("/admin");
+        const token = localStorage.getItem("cartimez_token");
+        let isAdmin = false;
+        if (token) {
+          try {
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            isAdmin = payload.isAdmin;
+          } catch {}
+        }
+        router.push(isAdmin ? "/admin" : "/dashboard");
       } else {
         setError("An account with this email already exists. Please login instead.");
       }

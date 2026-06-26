@@ -22,7 +22,16 @@ export default function LoginPage() {
     try {
       const success = await login(email, password);
       if (success) {
-        router.push("/admin");
+        // Check isAdmin from the stored user (available in AuthContext after login)
+        const token = localStorage.getItem("cartimez_token");
+        let isAdmin = false;
+        if (token) {
+          try {
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            isAdmin = payload.isAdmin;
+          } catch {}
+        }
+        router.push(isAdmin ? "/admin" : "/dashboard");
       } else {
         setError("Invalid email or password. Please try again.");
       }
