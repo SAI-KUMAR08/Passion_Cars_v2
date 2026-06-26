@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingContact from "@/components/FloatingContact";
 import { AuthProvider } from "@/context/AuthContext";
 import { CarProvider } from "@/context/CarContext";
 import { SettingsProvider } from "@/context/SettingsContext";
 import { ToastProvider } from "@/components/Toast";
+import LayoutShell from "@/components/LayoutShell";
 import SeedCredentials from "@/components/SeedCredentials";
 import "./globals.css";
 
@@ -50,10 +48,7 @@ export default function RootLayout({
             <SettingsProvider>
               <ToastProvider>
                 <SeedCredentials />
-                <Header />
-                <FloatingContact />
-                <main className="flex-1">{children}</main>
-                <Footer />
+                <LayoutShell>{children}</LayoutShell>
               </ToastProvider>
             </SettingsProvider>
           </CarProvider>
