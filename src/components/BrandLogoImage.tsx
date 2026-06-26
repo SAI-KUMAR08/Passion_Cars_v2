@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { brandLogos } from "@/data/cars";
 
 type LogoRenderer = (props: { color: string; bg: string }) => React.ReactNode;
@@ -69,9 +70,11 @@ export default function BrandLogoImage({ brand }: { brand: string }) {
   if (slug && !failed) {
     return (
       <div className="flex items-center justify-center h-full w-full">
-        <img
+        <Image
           src={`https://cdn.simpleicons.org/${slug}/${color.replace("#", "")}`}
           alt={`${brand} logo`}
+          width={32}
+          height={32}
           className="h-8 w-8 object-contain"
           onError={() => setFailed(true)}
         />

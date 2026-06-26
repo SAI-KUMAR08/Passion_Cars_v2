@@ -20,7 +20,15 @@ async function ensureSeedData() {
 
   console.log("🔹 Database empty — auto-seeding demo data...");
 
-  const cars = [
+  interface SeedCar {
+    name: string; brand: string; year: number;
+    transmission: string; fuel: string; color: string;
+    kilometers: number; price: number; originalPrice?: number;
+    image: string; images: string[]; stockId: string;
+    onSale?: boolean; sold?: boolean;
+  }
+
+  const cars: SeedCar[] = [
     { name: "Hyundai Creta", brand: "Hyundai", year: 2023, transmission: "Automatic", fuel: "Petrol", color: "White", kilometers: 12000, price: 1350000, originalPrice: 1550000, image: "https://images.unsplash.com/photo-1748214547184-d994bfe53322?w=800&h=600&fit=crop&auto=format", images: ["https://images.unsplash.com/photo-1748214547184-d994bfe53322?w=800&h=600&fit=crop&auto=format", "https://images.unsplash.com/photo-1748214547306-360d11024747?w=800&h=600&fit=crop&auto=format", "https://images.unsplash.com/photo-1633359064754-804ba55e733f?w=800&h=600&fit=crop&auto=format"], stockId: "STK24001", onSale: true },
     { name: "Toyota Fortuner", brand: "Toyota", year: 2022, transmission: "Automatic", fuel: "Diesel", color: "Silver", kilometers: 25000, price: 2800000, originalPrice: 3200000, image: "https://images.unsplash.com/photo-1664783856972-ac9922d7b2d3?w=800&h=600&fit=crop&auto=format", images: ["https://images.unsplash.com/photo-1664783856972-ac9922d7b2d3?w=800&h=600&fit=crop&auto=format", "https://images.unsplash.com/photo-1742697167580-af91e3ead35e?w=800&h=600&fit=crop&auto=format", "https://images.unsplash.com/photo-1670054953044-2605dbd0d747?w=800&h=600&fit=crop&auto=format"], stockId: "STK24002", onSale: true },
     { name: "Maruti Suzuki Swift", brand: "Maruti Suzuki", year: 2023, transmission: "Manual", fuel: "Petrol", color: "Blue", kilometers: 8000, price: 685000, image: "https://images.unsplash.com/photo-1663852408695-f57f4d75a536?w=800&h=600&fit=crop&auto=format", images: ["https://images.unsplash.com/photo-1663852408695-f57f4d75a536?w=800&h=600&fit=crop&auto=format", "https://images.unsplash.com/photo-1663852397535-18292e115327?w=800&h=600&fit=crop&auto=format", "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&h=600&fit=crop&auto=format"], stockId: "STK24003" },
@@ -36,7 +44,7 @@ async function ensureSeedData() {
   ];
 
   for (let i = 0; i < cars.length; i++) {
-    await prisma.car.create({ data: { ...cars[i] as any, displayId: i + 1 } });
+    await prisma.car.create({ data: { ...cars[i], displayId: i + 1 } });
   }
 
   const hash = await bcrypt.hash("admin123", 10);
