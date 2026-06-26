@@ -34,8 +34,9 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
 
-    if (phone.replace(/\s/g, "").length < 10) {
-      setError("Please enter a valid phone number with country code");
+    const digitsOnly = phone.replace(/\D/g, "");
+    if (digitsOnly.length < 10) {
+      setError("Please enter a valid phone number — must be at least 10 digits after country code");
       return;
     }
 
